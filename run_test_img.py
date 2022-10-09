@@ -12,14 +12,14 @@ img_dir = "test_imgs/"
 test_imgs = ["0_basil.jpg", "1_basil.jpg", "2_basil.jpg", "3_basil.jpg", "0_lettuce.jpg", "1_lettuce.jpg"]
 test_imgs = [os.path.join(img_dir, test_img) for test_img in test_imgs]
 
-model_file = "models_ugh/checkpoints/model_epoch_100.pkl"
+model_file = "models/checkpoints/model_epoch_100.pkl"
 model_classes = ['lactuca_sativa', 'ocimum_basilicum']
 
 # Load the model
 model = PlantClassifier(num_classes=2).to(device)
 model_dict = torch.load(model_file)
-print(model.load_state_dict(model_dict["model"]))
 model.eval()
+model.load_state_dict(model_dict["model"])
 
 transforms = transforms.Compose([
     transforms.ToTensor(),
@@ -33,7 +33,6 @@ for test_img in test_imgs:
     test_arr.append(test_img)
 
 test_arr = torch.stack(test_arr)
-print(test_arr.shape)
 
 # Make prediction
 pred = torch.nn.functional.softmax(model(test_arr), dim=-1)
