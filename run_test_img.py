@@ -6,7 +6,6 @@ import os
 from model import PlantClassifier
 from util.config import device 
 
-
 img_size = 256
 img_dir = "test_imgs/"
 test_imgs = ["0_basil.jpg", "1_basil.jpg", "2_basil.jpg", "3_basil.jpg", "0_lettuce.jpg", "1_lettuce.jpg"]

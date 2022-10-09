@@ -6,7 +6,6 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from sklearn.metrics import f1_score
-# from mixup import mixup, mixup_loss
 
 from util.config import device
 from model import PlantClassifier
