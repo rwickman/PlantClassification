@@ -5,9 +5,9 @@ import time
 import requests
 import os
 
-save_dir = "/media/data/datasets/plant/classification/ocimum_basilicum"
-plantnet_species_url = r'https://identify.plantnet.org/the-plant-list/species/Ocimum%20basilicum%20L./data' 
-plant_prefix = "basil"
+save_dir = "/media/data/datasets/plant/classification/lactuca_sativa"
+plantnet_species_url = r'https://identify.plantnet.org/the-plant-list/species/Lactuca%20sativa%20L./data' 
+plant_prefix = "lettuce"
 
 driver = webdriver.Firefox()
 driver.get(plantnet_species_url)
@@ -23,6 +23,9 @@ img_els = driver.find_elements(By.XPATH, r'/html/body/div[1]/div/div/main/div/di
 
 # Iterate over all images
 for i, img_el in enumerate(img_els):
+    if i <= 796:
+        continue
+
     # Goto source image
     driver.execute_script(f'window.scrollTo(0, {img_el.location["y"]})')
     

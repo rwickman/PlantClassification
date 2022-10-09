@@ -112,9 +112,8 @@ class Trainer:
             self.train_dict = json.load(f)
 
     def _evaluate(self, data_loader):
-
-        val_acc = 0.0
         self.model.eval()
+        val_acc = 0.0
         total_val_loss = 0
         num_exs = 0
         num_correct = 0
@@ -122,7 +121,6 @@ class Trainer:
         total_class_ids = []
         for batch in tqdm(data_loader):
             imgs, class_ids = batch[0].to(device), batch[1].to(device)
-
             
             preds = self.model(imgs)
 
@@ -132,13 +130,14 @@ class Trainer:
             
             num_correct += (preds.argmax(dim=1) == class_ids).sum()
 
-            # import matplotlib.pyplot as plt
-            # fig, axs = plt.subplots(1, 8)
-            # for i in range(8):
-            #     axs[i].imshow(imgs[i].detach().cpu().permute(1,2,0))
-            # print("PREDS", preds.argmax(dim=1).tolist())
-            # print("CLASSES", class_ids)
-            #plt.show()
+            import matplotlib.pyplot as plt
+            fig, axs = plt.subplots(1, 8)
+            for i in range(8):
+                axs[i].imshow(imgs[i].detach().cpu().permute(1,2,0))
+            print("PREDS", preds[:8])
+            print("PREDS", preds.argmax(dim=1).tolist()[:8])
+            print("CLASSES", class_ids[:8])
+            plt.show()
 
 
             # Add the preds and class_ids in the batch
@@ -181,12 +180,12 @@ class Trainer:
             print(f"Training epoch {epoch}...")
             for batch in tqdm(self.train_dataloader):
                 imgs, class_ids = batch[0].to(device), batch[1].to(device)
-                print(len(imgs))
+  
+                
                 # Perform mixup
                 #imgs, y_a, y_b, lam = mixup(imgs, class_ids, self.args.mixup_alpha)
         
                 preds = self.model(imgs)
-
                 self.optim.zero_grad()
 
                 # Use mixup loss function

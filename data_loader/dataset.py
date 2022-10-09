@@ -108,5 +108,7 @@ class ImageDataset(Dataset):
         
         # Augment the image (if is training data)
         img = self.transforms(img)
+        print(self.img_paths[idx], self.class_ids[idx])
+        print(img, img.min(), img.max(), img.mean())
 
         return img, self.class_ids[idx]
