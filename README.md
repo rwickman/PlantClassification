@@ -9,7 +9,8 @@ pip3 install -r requirements.txt
 ```
 
 ## Train the Model
-You can train the model by running:
+The model weights are given in `models/checkpoints/model_epoch_100.pkl`.
+However if you want to train the model yourself you can run:
 ```python
 python3 main.py
 ```
